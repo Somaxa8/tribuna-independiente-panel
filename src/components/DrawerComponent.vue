@@ -57,14 +57,12 @@ export default class DrawerComponent extends Vue {
   list = [
     {title: "Inicio", to: "/", icon: "mdi-home", subtitle: "Pantalla de inicio"},
     {title: "Usuarios", to: "/users", icon: "mdi-account-multiple", subheader: "Usuarios", divider: true},
-    {title: "Colecciones", to: "/collections", icon: "mdi-bookshelf", subheader: "Mercurio", divider: true},
-    {title: "Promociones", to: "/promos", icon: "mdi-percent"},
-    {title: "Videos", to: "/videos", icon: "mdi-video"},
-    {title: "Características", to: "/product-feature-types", icon: "mdi-tag-multiple", subheader: "Catálogo", divider: true},
-    {title: "Familia de productos", to: "/product-categories", icon: "mdi-shape"},
-    {title: "Productos", to: "/products", icon: "mdi-package-variant"},
-    {title: "Banners", to: "/banners", icon: "mdi-image", subheader: "Publicidad", divider: true},
-    {title: "Notificaciones", to: "/notifications", icon: "mdi-bell"},
+    {title: "Noticias", to: "/collections", icon: "mdi-newspaper-variant", subheader: "Tribuna Independiente", divider: true},
+    {title: "Cabeceras", to: "/promos", icon: "mdi-newspaper-variant-multiple-outline"},
+    {title: "Opinion", to: "/videos", icon: "mdi-post"},
+    {title: "Entrevistas", to: "/videos", icon: "mdi-message-video"},
+    {title: "Caricaturas", to: "/videos", icon: "mdi-message-image"},
+    {title: "Carrusel", to: "/banners", icon: "mdi-image", subheader: "Configuracion", divider: true},
   ]
 
   created() {
