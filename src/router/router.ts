@@ -18,6 +18,16 @@ const routes: Array<RouteConfig> = [
     name: 'login',
     component: () => import("@/views/LoginView.vue")
   },
+  {
+    path: '/users',
+    name: 'users',
+    component: () => import("@/views/UsersView.vue")
+  },
+  {
+    path: '/users/:userId(\\d+)(/authorities)?',
+    name: 'user',
+    component: () => import("@/views/UserView.vue")
+  },
 ]
 
 const router = new VueRouter({
