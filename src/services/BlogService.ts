@@ -1,24 +1,23 @@
 import {Vue} from "vue-property-decorator";
-import NewsLabel from "@/models/NewsLabel";
 import ConstantTool from "@/services/tool/ConstantTool";
 import JsonTool from "@/services/tool/JsonTool";
 import {getModule} from "vuex-module-decorators";
 import SnackbarModule from "@/store/SnackbarModule";
+import Blog from "@/models/Blog";
 import SessionModule from "@/store/SessionModule";
-import News from "@/models/News";
 
-export default class NewsService {
+export default class BlogService {
 
-    static async getNewsPaginated(component: Vue, news: News[], page: number, size: number, labelId: number | null | undefined) {
+    static async getBlogs(component: Vue, blogs: Blog[], page: number, size: number) {
         // @ts-ignore
         component.loading = true
         try {
-            const response = await component.axios.get(ConstantTool.BASE_URL + "/public/news", {
-                params: { page, size, labelId: labelId }
+            const response = await component.axios.get(ConstantTool.BASE_URL + "/public/blog", {
+                params: { page, size }
             })
-            let list = JsonTool.jsonConvert.deserializeArray(response.data, News)
-            news.splice(0, news.length)
-            list.forEach(v => news.push(v))
+            let list = JsonTool.jsonConvert.deserializeArray(response.data, Blog)
+            blogs.splice(0, blogs.length)
+            list.forEach(v => blogs.push(v))
             // @ts-ignore
             component.totalItems = Number(response.headers["x-total-count"]);
             // @ts-ignore
@@ -27,28 +26,28 @@ export default class NewsService {
             // @ts-ignore
             component.loading = false
             console.log(err)
-            getModule(SnackbarModule).makeToast("No se han podido obtener las noticias");
+            getModule(SnackbarModule).makeToast("No se han podido obtener los blogs");
         }
     }
 
-    static async getNews(component: Vue, id: number) {
+    static async getBlog(component: Vue, id: number) {
         // @ts-ignore
         component.loading = true
         try {
-            const response = await component.axios.get(ConstantTool.BASE_URL + "/public/news/" + id)
+            const response = await component.axios.get(ConstantTool.BASE_URL + "/public/blog/" + id)
             // @ts-ignore
-            component.news = JsonTool.jsonConvert.deserializeObject(response.data, News);
+            component.blog = JsonTool.jsonConvert.deserializeObject(response.data, Blog);
             // @ts-ignore
             component.loading = false
         } catch (err) {
             // @ts-ignore
             component.loading = false
             console.log(err)
-            getModule(SnackbarModule).makeToast("No se ha podido obtener la noticia");
+            getModule(SnackbarModule).makeToast("No se ha podido obtener el blog");
         }
     }
 
-    static async postNews(component: Vue, title: string, body: string, imageFile: File | null, featured: boolean = false, labelId: number | null) {
+    static async postBlog(component: Vue, title: string, body: string, imageFile: File | null) {
         // @ts-ignore
         component.loading = true
 
@@ -56,15 +55,13 @@ export default class NewsService {
         formData.set("title", title)
         formData.set("body", body)
         formData.set("imageFile", imageFile!)
-        formData.set("featured", featured ? "true" : "false")
-        if (labelId) formData.set("labelId", labelId.toString())
 
         try {
-            await component.axios.post(ConstantTool.BASE_URL + "/api/news/",
+            await component.axios.post(ConstantTool.BASE_URL + "/api/blog/",
                 formData, {
                     headers: {Authorization: getModule(SessionModule).session.token}
                 })
-            getModule(SnackbarModule).makeToast("Se ha creado la noticia correctamente!")
+            getModule(SnackbarModule).makeToast("Se ha creado el blog correctamente!")
             // @ts-ignore
             component.loading = false
             // @ts-ignore
@@ -75,11 +72,11 @@ export default class NewsService {
             // @ts-ignore
             component.loading = false
             console.log(err)
-            getModule(SnackbarModule).makeToast("No se ha podido crear la noticia")
+            getModule(SnackbarModule).makeToast("No se ha podido crear el blog")
         }
     }
 
-    static async patchNews(component: Vue, title: string | null, body: string | null, imageFile: File | null, featured: boolean = false, labelId: number | null, id: number) {
+    static async patchBlog(component: Vue, title: string | null, body: string | null, imageFile: File | null, id: number) {
         // @ts-ignore
         component.loading = true
 
@@ -87,15 +84,13 @@ export default class NewsService {
         if (title) formData.set("title", title)
         if (body) formData.set("body", body)
         if (imageFile) formData.set("imageFile", imageFile)
-        formData.set("featured", featured ? "true" : "false")
-        if (labelId) formData.set("labelId", labelId.toString())
 
         try {
-            await component.axios.patch(ConstantTool.BASE_URL + "/api/news/" + id,
+            await component.axios.patch(ConstantTool.BASE_URL + "/api/blog/" + id,
                 formData, {
                     headers: {Authorization: getModule(SessionModule).session.token}
                 })
-            getModule(SnackbarModule).makeToast("Se ha editado la noticia correctamente!")
+            getModule(SnackbarModule).makeToast("Se ha editado el blog correctamente!")
             // @ts-ignore
             component.loading = false
             // @ts-ignore
@@ -104,28 +99,28 @@ export default class NewsService {
             // @ts-ignore
             component.loading = false
             console.log(err)
-            getModule(SnackbarModule).makeToast("No se ha podido editar la noticia")
+            getModule(SnackbarModule).makeToast("No se ha podido editar el blog")
         }
     }
 
-    static async deleteNews(component: Vue, id: number) {
+    static async deleteBlog(component: Vue, id: number) {
         // @ts-ignore
         component.loading = true
 
         try {
-            await component.axios.delete(ConstantTool.BASE_URL + "/api/news/" + id, {
+            await component.axios.delete(ConstantTool.BASE_URL + "/api/blog/" + id, {
                 headers: {Authorization: getModule(SessionModule).session.token}
             })
             // @ts-ignore
             component.loading = false;
             // @ts-ignore
             component.refresh();
-            getModule(SnackbarModule).makeToast("Se ha eliminado la noticia de manera exitosa!")
+            getModule(SnackbarModule).makeToast("Se ha eliminado el blog de manera exitosa!")
         } catch (err) {
             console.log(err)
             // @ts-ignore
             component.loading = false
-            getModule(SnackbarModule).makeToast("Error al eliminar la noticia")
+            getModule(SnackbarModule).makeToast("Error al eliminar el blog")
         }
     }
 
