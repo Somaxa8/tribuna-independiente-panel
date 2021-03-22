@@ -8,11 +8,16 @@ import SnackbarModule from "@/store/SnackbarModule";
 
 export default class UserService {
 
-    static postUser(component: Vue, user: User) {
+    static postUser(component: Vue, email: string, password: string) {
         // @ts-ignore
         component.loading = true
-        component.axios.post(ConstantTool.BASE_URL + "/api/users",
-            user, {
+
+        let formData = new FormData()
+        formData.set("email", email)
+        formData.set("password", password)
+
+        component.axios.post(ConstantTool.BASE_URL + "/api/users/register",
+            formData, {
                 headers: {Authorization: getModule(SessionModule).session.token}
             })
             .then(response => {

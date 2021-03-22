@@ -29,6 +29,7 @@
         <v-card-text>
           <v-form ref="form">
             <v-text-field v-model="user.email" label="Email" :rules="emailRules"/>
+            <v-text-field v-model="password" label="Password" type="password" :rules="passwordRules"/>
           </v-form>
 
         </v-card-text>
@@ -57,6 +58,7 @@ export default class UsersView extends Vue {
   dialog: boolean = false
   users: User[] = []
   user: User = new User()
+  password: string = ""
   page: number = 1
   pageCount: number = 0
   loading: boolean = false
@@ -71,6 +73,9 @@ export default class UsersView extends Vue {
   emailRules = [
     (v: string) => v && v.length > 0 ? true : "Email requerido",
     (v: string) => StringTool.validateEmail(v) ? true : "Email no es válido"
+  ]
+  passwordRules = [
+    (v: string) => v.length > 0 ? true : "Contraseña requerida"
   ]
 
   created() {
@@ -92,7 +97,7 @@ export default class UsersView extends Vue {
       getModule(DialogModule).showDialog(new Dialog(
           "Aviso",
           "¿Está seguro de crear el usuario?",
-          () => UserService.postUser(this, this.user)
+          () => UserService.postUser(this, this.user.email!, this.password)
       ))
     }
   }

@@ -63,9 +63,9 @@
             <v-text-field v-model="repeatPassword" :type="showNewPassword ? 'text' : 'password'" label="Repite contraseña"
                           @click:append="showNewPassword = !showNewPassword" :append-icon="showNewPassword ? 'mdi-eye-off' : 'mdi-eye'"
                           :rules="[
-                                        () => repeatPassword.length > 0 ? true : 'Repite contraseña requerida',
-                                        () => repeatPassword && repeatPassword == newPassword ? true : 'Las contraseñas deben coincidir'
-                                      ]"/>
+                              () => repeatPassword.length > 0 ? true : 'Repite contraseña requerida',
+                              () => repeatPassword && repeatPassword == newPassword ? true : 'Las contraseñas deben coincidir']"
+            />
           </v-form>
         </v-card-text>
         <v-card-actions>
