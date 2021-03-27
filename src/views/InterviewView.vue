@@ -7,16 +7,17 @@
         <v-form ref="form">
           <v-row>
             <v-col cols="12">
-              <v-text-field v-model="interview.title" label="Titulo"/>
+              <v-text-field v-model="interview.title" label="Titulo" :rules="titleRules"/>
             </v-col>
             <v-col cols="12">
-              <v-text-field v-model="interview.videoUrl" label="Url"/>
+              <v-text-field v-model="interview.videoUrl" label="Url" :rules="titleRules"/>
             </v-col>
             <v-col cols="12">
               <v-textarea
                   v-model="interview.body"
                   name="Contenido"
                   label="Contenido"
+                  :rules="titleRules"
               />
             </v-col>
           </v-row>
@@ -46,7 +47,7 @@ export default class InterviewView extends Vue {
   @Ref() readonly form!: HTMLFormElement
   interview: Interview = new Interview()
   loading: boolean = false
-//  titleRules = [(v: string) => v && v.length > 0 ? true : "Campo requerido"]
+  titleRules = [(v: string) => v && v.length > 0 ? true : "Campo requerido"]
 
   created() {
     this.refresh()

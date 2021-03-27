@@ -19,6 +19,7 @@
         <v-card-actions class="pr-0">
           <v-spacer/>
           <v-btn v-if="$route.name === 'headlineUpdate'" @click="updateHeadline()" small color="primary">Guardar</v-btn>
+          <v-btn v-if="$route.name === 'headlineUpdate'" @click="deleteHeadline()" small color="error">Eliminar</v-btn>
           <v-btn v-if="$route.name === 'headlineCreate'" @click="createHeadline()" small color="primary">Crear</v-btn>
         </v-card-actions>
       </v-card-text>
@@ -69,6 +70,16 @@ export default class HeadlineView extends Vue {
           "Aviso",
           "¿Está seguro de crear esta cabecera?",
           () => HeadlineService.postHeadline(this, this.headline.body!, this.getHour())
+      ))
+    }
+  }
+
+  deleteHeadline() {
+    if (this.form.validate()) {
+      getModule(DialogModule).showDialog(new Dialog(
+          "Aviso",
+          "¿Está seguro de eliminar esta cabecera?",
+          () => HeadlineService.deleteHeadline(this, this.headline.id!)
       ))
     }
   }

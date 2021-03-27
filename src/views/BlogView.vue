@@ -29,6 +29,7 @@
         </v-form>
         <v-card-actions class="pr-0">
           <v-spacer/>
+          <v-btn v-if="$route.name === 'blogUpdate'" @click="deleteBlog()" small color="primary">Eliminar</v-btn>
           <v-btn v-if="$route.name === 'blogUpdate'" @click="updateBlog()" small color="primary">Guardar</v-btn>
           <v-btn v-if="$route.name === 'blogCreate'" @click="createBlog()" small color="primary">Crear</v-btn>
         </v-card-actions>
@@ -79,6 +80,16 @@ export default class BlogView extends Vue {
           "Aviso",
           "¿Está seguro de crear esta opinion?",
           () => BlogService.postBlog(this, this.blog.title!, this.blog.body!, this.imageFile)
+      ))
+    }
+  }
+
+  deleteBlog() {
+    if (this.form.validate()) {
+      getModule(DialogModule).showDialog(new Dialog(
+          "Aviso",
+          "¿Está seguro de eliminar esta opinion?",
+          () => BlogService.deleteBlog(this, this.blog.id!)
       ))
     }
   }

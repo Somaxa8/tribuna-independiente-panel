@@ -42,6 +42,7 @@
             <v-switch v-model="news.featured" label="Destacado" color="success" hide-details/>
           </div>
           <v-spacer/>
+          <v-btn v-if="$route.name === 'newsUpdate'" @click="deleteNews()" small color="error">Eliminar</v-btn>
           <v-btn v-if="$route.name === 'newsUpdate'" @click="updateNews()" small color="primary">Guardar</v-btn>
           <v-btn v-if="$route.name === 'newsCreate'" @click="createNews()" small color="primary">Crear</v-btn>
         </v-card-actions>
@@ -59,6 +60,7 @@ import News from "@/models/News";
 import NewsService from "@/services/NewsService";
 import NewsLabel from "@/models/NewsLabel";
 import NewsLabelService from "@/services/NewsLabelService";
+import InterviewService from "@/services/InterviewService";
 
 @Component
 export default class NewView extends Vue {
@@ -94,6 +96,16 @@ export default class NewView extends Vue {
           "Aviso",
           "¿Está seguro de crear esta noticia?",
           () => NewsService.postNews(this, this.news.title!, this.news.body!, this.imageFile, this.news.featured, this.news.label!.id!)
+      ))
+    }
+  }
+
+  deleteNews() {
+    if (this.form.validate()) {
+      getModule(DialogModule).showDialog(new Dialog(
+          "Aviso",
+          "¿Está seguro de eliminar esta noticia?",
+          () => NewsService.deleteNews(this, this.news.id!)
       ))
     }
   }
