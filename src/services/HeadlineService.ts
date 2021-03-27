@@ -5,17 +5,22 @@ import {getModule} from "vuex-module-decorators";
 import SnackbarModule from "@/store/SnackbarModule";
 import Headline from "@/models/Headline";
 import SessionModule from "@/store/SessionModule";
+import Cartoon from "@/models/Cartoon";
 
 export default class HeadlineService {
 
-    static async getHeadlines(component: Vue, headlines: Headline[]) {
+    static async getHeadlines(component: Vue, headlines: Headline[], page: number, size: number) {
         // @ts-ignore
         component.loading = true
         try {
-            const response = await component.axios.get(ConstantTool.BASE_URL + "/public/headline")
+            const response = await component.axios.get(ConstantTool.BASE_URL + "/public/headline", {
+                params: { page, size }
+            })
             let list = JsonTool.jsonConvert.deserializeArray(response.data, Headline)
             headlines.splice(0, headlines.length)
             list.forEach(v => headlines.push(v))
+            // @ts-ignore
+            component.totalItems = Number(response.headers["x-total-count"]);
             // @ts-ignore
             component.loading = false
         } catch (err) {
@@ -32,7 +37,7 @@ export default class HeadlineService {
         try {
             const response = await component.axios.get(ConstantTool.BASE_URL + "/public/headline/" + id)
             // @ts-ignore
-            component.blog = JsonTool.jsonConvert.deserializeObject(response.data, Headline);
+            component.headline = JsonTool.jsonConvert.deserializeObject(response.data, Headline);
             // @ts-ignore
             component.loading = false
         } catch (err) {
@@ -71,7 +76,7 @@ export default class HeadlineService {
         }
     }
 
-    static async patchHeadline(component: Vue, body: string | null, hour: string | null, id: number) {
+    static async patchHeadline(component: Vue, body: string | undefined, hour: string, id: number) {
         // @ts-ignore
         component.loading = true
 
