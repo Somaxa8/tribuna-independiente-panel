@@ -6,6 +6,7 @@ import Slider from "@/models/Slider";
 import Vue from "vue/types/umd";
 import JsonTool from "@/services/tool/JsonTool";
 import PostSliderPanel from "@/components/panel/PostSliderPanel.vue";
+import Headline from "@/models/Headline";
 
 export default class SliderService {
 
@@ -54,6 +55,23 @@ export default class SliderService {
             getModule(SnackbarModule).makeToast("No se han podido obtener los sliders");
         }
 
+    }
+
+    static async getSlider(component: Vue, id: number) {
+        // @ts-ignore
+        component.loading = true
+        try {
+            const response = await component.axios.get(ConstantTool.BASE_URL + "/public/slider/" + id)
+            // @ts-ignore
+            component.slider = JsonTool.jsonConvert.deserializeObject(response.data, Slider);
+            // @ts-ignore
+            component.loading = false
+        } catch (err) {
+            // @ts-ignore
+            component.loading = false
+            console.log(err)
+            getModule(SnackbarModule).makeToast("No se ha podido obtener el Slider");
+        }
     }
 
     static async deleteSlider(component: Vue, id: number) {
