@@ -76,7 +76,7 @@ export default class BlogService {
         }
     }
 
-    static async patchBlog(component: Vue, title: string | null, body: string | null, imageFile: File | null, id: number) {
+    static async patchBlog(component: Vue, title: string | undefined, body: string | undefined, imageFile: File | null, id: number) {
         // @ts-ignore
         component.loading = true
 

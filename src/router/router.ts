@@ -28,6 +28,51 @@ const routes: Array<RouteConfig> = [
     name: 'user',
     component: () => import("@/views/UserView.vue")
   },
+  {
+    path: '/news',
+    name: 'news',
+    component: () => import("@/views/NewsView.vue")
+  },
+  {
+    path: '/news/update/:id',
+    name: 'newsUpdate',
+    component: () => import("@/views/NewView.vue")
+  },
+  {
+    path: '/news/create',
+    name: 'newsCreate',
+    component: () => import("@/views/NewView.vue")
+  },
+  {
+    path: '/headlines',
+    name: 'headlines',
+    component: () => import("@/views/HeadlinesView.vue")
+  },
+  {
+    path: '/headline/create/',
+    name: 'headlineCreate',
+    component: () => import("@/views/HeadlineView.vue")
+  },
+  {
+    path: '/headline/update/:id',
+    name: 'headlineUpdate',
+    component: () => import("@/views/HeadlineView.vue")
+  },
+  {
+    path: '/blogs',
+    name: 'blogs',
+    component: () => import("@/views/BlogsView.vue")
+  },
+  {
+    path: '/blog/create',
+    name: 'blogCreate',
+    component: () => import("@/views/BlogView.vue")
+  },
+  {
+    path: '/blog/update/:id',
+    name: 'blogUpdate',
+    component: () => import("@/views/BlogView.vue")
+  },
 ]
 
 const router = new VueRouter({

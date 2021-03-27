@@ -1,12 +1,13 @@
 import {JsonObject, JsonProperty} from "json2typescript";
 import Document from "@/models/Document";
+import Auditing from "@/models/Auditing";
 
 @JsonObject("Blog")
-export default class Blog {
+export default class Blog extends Auditing{
 
     @JsonProperty("id", Number, true)
     id?: number = undefined
-    @JsonProperty("title", Document, true)
+    @JsonProperty("image", Document, true)
     image?: Document = undefined
     @JsonProperty("title", String, true)
     title?: string = undefined
