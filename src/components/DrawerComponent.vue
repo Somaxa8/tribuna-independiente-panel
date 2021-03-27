@@ -60,9 +60,9 @@ export default class DrawerComponent extends Vue {
     {title: "Noticias", to: "/news", icon: "mdi-newspaper-variant", subheader: "Tribuna Independiente", divider: true},
     {title: "Cabeceras", to: "/headlines", icon: "mdi-newspaper-variant-multiple-outline"},
     {title: "Opinion", to: "/blogs", icon: "mdi-post"},
-    {title: "Entrevistas", to: "/videos", icon: "mdi-message-video"},
-    {title: "Caricaturas", to: "/videos", icon: "mdi-message-image"},
-    {title: "Carrusel", to: "/banners", icon: "mdi-image", subheader: "Configuracion", divider: true},
+    {title: "Entrevistas", to: "/interviews", icon: "mdi-message-video"},
+    {title: "Caricaturas", to: "/cartoons", icon: "mdi-message-image"},
+    {title: "Carrusel", to: "/slider", icon: "mdi-image", subheader: "Configuracion", divider: true},
   ]
 
   created() {

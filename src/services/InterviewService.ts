@@ -5,10 +5,12 @@ import {getModule} from "vuex-module-decorators";
 import SnackbarModule from "@/store/SnackbarModule";
 import Interview from "@/models/Interview";
 import SessionModule from "@/store/SessionModule";
+import InterviewView from "@/views/InterviewView.vue";
+import InterviewsView from "@/views/InterviewsView.vue";
 
 export default class InterviewService {
 
-    static async getInterviews(component: Vue, interviews: Interview[], page: number, size: number) {
+    static async getInterviews(component: InterviewsView, interviews: Interview[], page: number, size: number) {
         // @ts-ignore
         component.loading = true
         try {
@@ -30,13 +32,13 @@ export default class InterviewService {
         }
     }
 
-    static async getInterview(component: Vue, id: number) {
+    static async getInterview(component: InterviewView, id: number) {
         // @ts-ignore
         component.loading = true
         try {
             const response = await component.axios.get(ConstantTool.BASE_URL + "/public/interview/" + id)
             // @ts-ignore
-            component.blog = JsonTool.jsonConvert.deserializeObject(response.data, Interview);
+            component.interview = JsonTool.jsonConvert.deserializeObject(response.data, Interview);
             // @ts-ignore
             component.loading = false
         } catch (err) {
@@ -47,7 +49,7 @@ export default class InterviewService {
         }
     }
 
-    static async postInterview(component: Vue, title: string, body: string, videoUrl: string) {
+    static async postInterview(component: InterviewView, title: string, body: string, videoUrl: string) {
         // @ts-ignore
         component.loading = true
 
@@ -76,7 +78,7 @@ export default class InterviewService {
         }
     }
 
-    static async patchInterview(component: Vue, title: string | null, body: string | null, videoUrl: string | null, id: number) {
+    static async patchInterview(component: InterviewView, title: string | undefined, body: string | undefined, videoUrl: string | undefined, id: number) {
         // @ts-ignore
         component.loading = true
 

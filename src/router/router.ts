@@ -73,6 +73,21 @@ const routes: Array<RouteConfig> = [
     name: 'blogUpdate',
     component: () => import("@/views/BlogView.vue")
   },
+  {
+    path: '/interviews',
+    name: 'interviews',
+    component: () => import("@/views/InterviewsView.vue")
+  },
+  {
+    path: '/interview/create',
+    name: 'interviewCreate',
+    component: () => import("@/views/InterviewView.vue")
+  },
+  {
+    path: '/interview/update/:id',
+    name: 'interviewUpdate',
+    component: () => import("@/views/InterviewView.vue")
+  },
 ]
 
 const router = new VueRouter({
