@@ -1,5 +1,4 @@
 import {Vue} from "vue-property-decorator";
-import NewsLabel from "@/models/NewsLabel";
 import ConstantTool from "@/services/tool/ConstantTool";
 import JsonTool from "@/services/tool/JsonTool";
 import {getModule} from "vuex-module-decorators";
@@ -79,7 +78,7 @@ export default class NewsService {
         }
     }
 
-    static async patchNews(component: Vue, title: string | null, body: string | null, imageFile: File | null, featured: boolean = false, labelId: number | null, id: number) {
+    static async patchNews(component: Vue, title: string | undefined, body: string | undefined, imageFile: File | null, featured: boolean = false, labelId: number | undefined, id: number) {
         // @ts-ignore
         component.loading = true
 

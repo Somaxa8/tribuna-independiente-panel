@@ -2,8 +2,8 @@ import {JsonConverter, JsonCustomConvert, JsonObject, JsonProperty} from "json2t
 import Auditing from "@/models/Auditing";
 
 export enum DocumentType {
-    TASK = "TASK",
-    CONTRACT = "CONTRACT"
+    IMAGE = "IMAGE",
+    DOCUMENT = "DOCUMENT"
 }
 
 @JsonConverter
@@ -21,17 +21,21 @@ export default class Document extends Auditing {
 
     @JsonProperty("id", Number, true)
     id?: number = undefined
+    @JsonProperty("url", String, true)
+    url?: string = undefined
+    @JsonProperty("name", String, true)
+    name?: string = undefined
     @JsonProperty("baseName", String, true)
     baseName?: string = undefined
     @JsonProperty("extension", String, true)
     extension?: string = undefined
+    @JsonProperty("title", String, true)
+    title?: string = undefined
     @JsonProperty("description", String, true)
     description?: string = undefined
-    @JsonProperty("type", TypeConverter, true)
-    type?: DocumentType = undefined
     @JsonProperty("tag", String, true)
     tag?: string = undefined
-    @JsonProperty("url", String, true)
-    url?: string = undefined
+    @JsonProperty("type", TypeConverter, true)
+    type?: DocumentType = undefined
 
 }
