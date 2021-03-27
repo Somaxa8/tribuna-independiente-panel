@@ -24,8 +24,8 @@
         </v-form>
         <v-card-actions class="pr-0">
           <v-spacer/>
-          <v-btn v-if="$route.name === 'interviewUpdate'" @click="deleteInterview()" small color="error">Eliminar</v-btn>
           <v-btn v-if="$route.name === 'interviewUpdate'" @click="updateInterview()" small color="primary">Guardar</v-btn>
+          <v-btn v-if="$route.name === 'interviewUpdate'" @click="deleteInterview()" small color="error">Eliminar</v-btn>
 
           <v-btn v-if="$route.name === 'interviewCreate'" @click="createInterview()" small color="primary">Crear</v-btn>
         </v-card-actions>

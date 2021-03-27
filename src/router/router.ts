@@ -88,6 +88,31 @@ const routes: Array<RouteConfig> = [
     name: 'interviewUpdate',
     component: () => import("@/views/InterviewView.vue")
   },
+  {
+    path: '/cartoons',
+    name: 'cartoons',
+    component: () => import("@/views/CartoonsView.vue")
+  },
+  {
+    path: '/cartoon/create',
+    name: 'cartoonCreate',
+    component: () => import("@/views/CartoonView.vue")
+  },
+  {
+    path: '/cartoon/update/:id',
+    name: 'cartoonUpdate',
+    component: () => import("@/views/CartoonView.vue")
+  },
+  {
+    path: '/sliders',
+    name: 'sliders',
+    component: () => import("@/views/SlidersView.vue")
+  },
+  {
+    path: '/slider',
+    name: 'slider',
+    component: () => import("@/views/SliderView.vue")
+  },
 ]
 
 const router = new VueRouter({

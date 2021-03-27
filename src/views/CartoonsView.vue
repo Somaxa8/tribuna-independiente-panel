@@ -1,0 +1,60 @@
+<template>
+  <v-container fluid>
+    <v-card>
+      <v-card-title>
+        Caricaturas
+        <v-spacer/>
+        <v-btn @click="$router.push('/cartoon/create')" color="primary" small class="ml-5">Nueva Caricatura</v-btn>
+      </v-card-title>
+      <v-card-title>
+        <v-row>
+          <v-col cols="12">
+            <v-text-field clearable v-model="search" append-icon="mdi-magnify" label="Buscar"/>
+          </v-col>
+        </v-row>
+      </v-card-title>
+      <v-pagination v-model="page" :length="pageCount" :total-visible="8"/>
+      <v-card-text>
+        <v-data-table :headers="headers" :items="cartoons" hide-default-footer :loading="loading" :items-per-page="itemsPerPage"
+                      :show-select="false" :page.sync="page" @page-count="pageCount = $event" loading-text="Cargando..."
+                      :search="search" no-results-text="No hay resultados" no-data-text="No hay resultados"
+                      @click:row="rowClick">
+        </v-data-table>
+      </v-card-text>
+    </v-card>
+  </v-container>
+</template>
+
+<script lang="ts">
+import {Component, Ref, Vue} from "vue-property-decorator";
+import Headline from "@/models/Headline";
+import HeadlineService from "@/services/HeadlineService";
+import Cartoon from "@/models/Cartoon";
+import CartoonService from "@/services/CartoonService";
+
+@Component
+export default class CartoonsView extends Vue {
+  @Ref() readonly form!: HTMLFormElement
+  dialog: boolean = false
+  cartoons: Cartoon[] = []
+  page: number = 1
+  itemsPerPage: number = 8
+  pageCount: number = 0
+  loading: boolean = false
+  search: string = ""
+  headers = [
+    { text: "Id", value: "id", width: "200px" },
+    { text: "Titulo", value: "title", width: "200px" }
+  ]
+
+  created() {
+    CartoonService.getCartoons(this, this.cartoons, this.page - 1, this.itemsPerPage)
+  }
+
+  rowClick(cartoon: Cartoon) {
+    this.$router.push({path: "/cartoon/update/" + cartoon.id})
+  }
+
+}
+</script>
+

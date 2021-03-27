@@ -29,8 +29,8 @@
         </v-form>
         <v-card-actions class="pr-0">
           <v-spacer/>
-          <v-btn v-if="$route.name === 'blogUpdate'" @click="deleteBlog()" small color="primary">Eliminar</v-btn>
           <v-btn v-if="$route.name === 'blogUpdate'" @click="updateBlog()" small color="primary">Guardar</v-btn>
+          <v-btn v-if="$route.name === 'blogUpdate'" @click="deleteBlog()" small color="primary">Eliminar</v-btn>
           <v-btn v-if="$route.name === 'blogCreate'" @click="createBlog()" small color="primary">Crear</v-btn>
         </v-card-actions>
       </v-card-text>

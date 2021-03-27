@@ -42,8 +42,8 @@
             <v-switch v-model="news.featured" label="Destacado" color="success" hide-details/>
           </div>
           <v-spacer/>
-          <v-btn v-if="$route.name === 'newsUpdate'" @click="deleteNews()" small color="error">Eliminar</v-btn>
           <v-btn v-if="$route.name === 'newsUpdate'" @click="updateNews()" small color="primary">Guardar</v-btn>
+          <v-btn v-if="$route.name === 'newsUpdate'" @click="deleteNews()" small color="error">Eliminar</v-btn>
           <v-btn v-if="$route.name === 'newsCreate'" @click="createNews()" small color="primary">Crear</v-btn>
         </v-card-actions>
       </v-card-text>

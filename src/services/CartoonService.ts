@@ -36,7 +36,7 @@ export default class CartoonService {
         try {
             const response = await component.axios.get(ConstantTool.BASE_URL + "/public/cartoon/" + id)
             // @ts-ignore
-            component.blog = JsonTool.jsonConvert.deserializeObject(response.data, Cartoon);
+            component.cartoon = JsonTool.jsonConvert.deserializeObject(response.data, Cartoon);
             // @ts-ignore
             component.loading = false
         } catch (err) {
@@ -76,7 +76,7 @@ export default class CartoonService {
         }
     }
 
-    static async patchCartoon(component: Vue, title: string | null, body: string | null, imageFile: File | null, id: number) {
+    static async patchCartoon(component: Vue, title: string | undefined, body: string | undefined, imageFile: File | null, id: number) {
         // @ts-ignore
         component.loading = true
 
