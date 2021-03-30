@@ -15,12 +15,7 @@
               <v-text-field v-model="blog.title" label="Titulo" :rules="titleRules"/>
             </v-col>
             <v-col cols="12">
-              <v-textarea
-                  v-model="blog.body"
-                  name="Contenido"
-                  label="Contenido"
-                  :rules="titleRules"
-              />
+              <vue-editor v-model="blog.body" />
             </v-col>
             <v-col cols="12">
               <v-file-input v-model="imageFile" label="Banner" filled prepend-icon="mdi-image" accept="image/png, image/jpeg"/>

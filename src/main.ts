@@ -4,6 +4,7 @@ import router from './router/router'
 import store from './store/store'
 import vuetify from './config/vuetify';
 import AxiosConfig from "@/config/AxiosConfig";
+import VueEditorConfig from "@/config/VueEditorConfig";
 
 Vue.config.productionTip = false
 
@@ -15,3 +16,4 @@ const vue = new Vue({
 }).$mount('#app')
 
 AxiosConfig.init(vue)
+VueEditorConfig.init()

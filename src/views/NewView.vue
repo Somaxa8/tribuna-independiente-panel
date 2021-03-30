@@ -15,12 +15,7 @@
               <v-text-field v-model="news.title" label="Titulo" :rules="titleRules"/>
             </v-col>
             <v-col cols="12">
-              <v-textarea
-                  v-model="news.body"
-                  name="Contenido"
-                  label="Contenido"
-                  :rules="titleRules"
-              />
+              <vue-editor v-model="news.body" />
             </v-col>
             <v-col cols="6">
               <v-select :items="labels" v-model="news.label" filled label="Categoria" dense>
@@ -60,16 +55,17 @@ import News from "@/models/News";
 import NewsService from "@/services/NewsService";
 import NewsLabel from "@/models/NewsLabel";
 import NewsLabelService from "@/services/NewsLabelService";
-import InterviewService from "@/services/InterviewService";
 
 @Component
 export default class NewView extends Vue {
   @Ref() readonly form!: HTMLFormElement
+  @Ref() readonly editor!: any
   news: News = new News()
   loading: boolean = false
   imageFile: File | null = null
   labels: NewsLabel[] = []
   titleRules = [(v: string) => v && v.length > 0 ? true : "Campo requerido"]
+
 
   created() {
     this.refresh()
