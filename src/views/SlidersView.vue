@@ -54,6 +54,7 @@ export default class SlidersView extends Vue {
     { text: "Banner", value: "image", width: "200px" },
     { text: "Url", value: "url", width: "200px"},
     { text: "Eliminar", value: "delete", width: "200px"},
+    // { text: "Creado por", value: "createdBy", width: "200px" },
   ]
 
   created() {

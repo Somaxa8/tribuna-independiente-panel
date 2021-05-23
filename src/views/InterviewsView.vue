@@ -22,6 +22,16 @@
           <template v-slot:item.videoUrl="{item}">
             <v-btn :href="item.videoUrl" target="_blank" link>ENTREVISTA</v-btn>
           </template>
+            <template v-slot:item.createdBy="{item}">
+                <v-chip v-if="item.createdBy" class="ma-2" color="info" label>
+                    {{ item.createdBy.name }}
+                </v-chip>
+            </template>
+            <template v-slot:item.createdAt="{item}">
+                <v-chip class="ma-2" color="info" label>
+                    {{ item.createdAt.setLocale("es").toFormat('dd MMMM yyyy') }}
+                </v-chip>
+            </template>
         </v-data-table>
       </v-card-text>
     </v-card>
@@ -47,6 +57,8 @@ export default class InterviewsView extends Vue {
     { text: "Id", value: "id", width: "200px" },
     { text: "Titulo", value: "title", width: "200px" },
     { text: "Url", value: "videoUrl", width: "200px" },
+    { text: "Fecha de creación", value: "createdAt", width: "200px" },
+    { text: "Creado por", value: "createdBy", width: "200px" },
   ]
 
   created() {

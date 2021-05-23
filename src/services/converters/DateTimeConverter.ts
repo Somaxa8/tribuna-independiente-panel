@@ -5,7 +5,7 @@ import {DateTime} from "luxon";
 export default class DateTimeConverter implements JsonCustomConvert<DateTime> {
 
     deserialize(data: any): DateTime {
-        return DateTime.fromISO(data);
+        return DateTime.fromISO(data)
     }
 
     serialize(data: DateTime): any {

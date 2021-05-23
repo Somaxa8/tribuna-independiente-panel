@@ -19,6 +19,16 @@
                       :show-select="false" :page.sync="page" @page-count="pageCount = $event" loading-text="Cargando..."
                       :search="search" no-results-text="No hay resultados" no-data-text="No hay resultados"
                       @click:row="rowClick">
+          <template v-slot:item.createdAt="{item}">
+            <v-chip class="ma-2" color="info" label>
+              {{ item.createdAt.setLocale("es").toFormat('dd MMMM yyyy') }}
+            </v-chip>
+          </template>
+          <template v-slot:item.createdBy="{item}">
+            <v-chip v-if="item.createdBy" class="ma-2" color="info" label>
+              {{ item.createdBy.name }}
+            </v-chip>
+          </template>
         </v-data-table>
       </v-card-text>
     </v-card>
@@ -43,6 +53,8 @@ export default class NewsView extends Vue {
   headers = [
     { text: "Id", value: "id", width: "200px" },
     { text: "Titulo", value: "title", width: "200px" },
+    { text: "Fecha de creación", value: "createdAt", width: "200px" },
+    { text: "Creado por", value: "createdBy", width: "200px" },
   ]
   file: File | null = null
 
