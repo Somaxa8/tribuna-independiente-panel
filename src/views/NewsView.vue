@@ -59,7 +59,7 @@ export default class NewsView extends Vue {
   file: File | null = null
 
   created() {
-    NewsService.getNewsPaginated(this, this.news, this.page - 1, this.itemsPerPage, null)
+    NewsService.getNewsPaginated(this, this.news, this.page - 1, this.itemsPerPage, false, null)
   }
 
   rowClick(news: News) {
